@@ -125,3 +125,12 @@ async def get_beyonce_tracks():
     ]
 
     return {"tracks": formatted_tracks}
+
+@app.get("/spotify-token")
+async def get_spotify_access_token():
+    try:
+        access_token = get_spotify_token()
+        return {"access_token": access_token}
+    except HTTPException as e:
+        raise HTTPException(status_code=e.status_code, detail="Failed to retrieve Spotify access token")
+
